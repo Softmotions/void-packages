@@ -1,6 +1,6 @@
 # Template file for 'uncrustify'
 pkgname=uncrustify
-version=0.81.0
+version=0.82.0
 revision=1
 build_style=cmake
 hostmakedepends="python3"
@@ -10,4 +10,4 @@ license="GPL-2.0-or-later"
 homepage="https://uncrustify.sourceforge.net/"
 changelog="https://raw.githubusercontent.com/uncrustify/uncrustify/master/ChangeLog"
 distfiles="https://github.com/uncrustify/uncrustify/archive/refs/tags/uncrustify-${version}.tar.gz"
-checksum=484623dc16b92206adc6ac0770077c6c67c6e441102148c2a121a19549330ff9
+checksum=e05f8d5ee36aaa1acfa032fe97546b7be46b1f4620e7c38037f8a42e25fe676f
