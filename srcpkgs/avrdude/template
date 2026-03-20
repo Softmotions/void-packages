@@ -3,10 +3,11 @@ pkgname=avrdude
 version=8.1
 revision=1
 build_style=cmake
-hostmakedepends="flex"
+configure_args="-DHAVE_LINUXGPIO=ON -DHAVE_LINUXSPI=ON -DHAVE_PARPORT=ON
+ -DCONFIG_DIR=/etc"
+hostmakedepends="flex pkg-config"
 makedepends="elfutils-devel libusb-devel libusb-compat-devel libftdi1-devel
- hidapi-devel"
-depends="avr-libc"
+ hidapi-devel libgpiod-devel libserialport-devel"
 short_desc="Utility to manipulate ROM and EEPROM of AVR microcontrollers"
 maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-only"
