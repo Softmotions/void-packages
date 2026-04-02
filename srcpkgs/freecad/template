@@ -1,7 +1,7 @@
 # Template file for 'freecad'
 pkgname=freecad
-version=1.0.2
-revision=9
+version=1.1.0
+revision=4
 _pycxx_ver=7.1.8
 _ondsel_ver=09d6175a2ba69e7016fcecc4f384946a2f84f92d
 build_style=cmake
@@ -21,18 +21,18 @@ makedepends="boost-devel-minimal boost-python3 libboost_filesystem
  hdf5-devel libgomp-devel libmed-devel eigen double-conversion-devel
  coin3-devel libspnav-devel liblz4-devel netcdf-devel jsoncpp-devel
  glew-devel python3-devel yaml-cpp-devel guidelines-support-library
- qt6-base-devel qt6-svg-devel qt6-tools-devel libpyside6-devel"
+ qt6-base-devel qt6-svg-devel qt6-tools-devel libpyside6-devel python3-pybind11"
 depends="python3-matplotlib python3-pivy python3-GitPython python3-Markdown
  python3-pyside6-gui python3-pyside6-network python3-pyside6-printsupport
- python3-pyside6-ui-tools python3-pyside6-widgets"
+ python3-pyside6-ui-tools python3-pyside6-widgets python3-pyside6-svg"
 short_desc="General purpose 3D CAD modeler"
 maintainer="Orphaned <orphan@voidlinux.org>"
 license="LGPL-2.0-or-later"
 homepage="https://freecadweb.org/"
-distfiles="https://github.com/FreeCAD/FreeCAD/archive/${version}.tar.gz
+distfiles="https://github.com/FreeCAD/FreeCAD/releases/download/${version}/freecad_source_${version}.tar.gz
  ${SOURCEFORGE_SITE}/cxx/pycxx-${_pycxx_ver}.tar.gz
  https://github.com/FreeCAD/OndselSolver/archive/${_ondsel_ver}.tar.gz>OndselSolver-${_ondsel_ver}.tar.gz"
-checksum="228ee52f00627c7d8fa61998179deb01865ece69390829feb1300228d24f7e9e
+checksum="3d041561aa129755eea51dfc0e1cdf43f2623ab06538e0860a91dbef1ae433d7
  4b91e1e1141c23fbd5039df635c4bb6e75632168548f56b83ce177193c0c98c6
  890fb6ddeb1b42face95854689ff7b96c926c368b7d616d9e31e4b35f79ddde8"
 python_version=3
@@ -49,7 +49,6 @@ CXXFLAGS="-DPYCXX_PYTHON_2TO3"
 post_extract() {
 	vsrcextract -C src/3rdParty/OndselSolver "OndselSolver-${_ondsel_ver}.tar.gz"
 	vsrcextract -C pycxx "pycxx-${_pycxx_ver}.tar.gz"
-	rm -r src/CXX
 	ln -Tsr ./pycxx/CXX src/CXX
 }
 
