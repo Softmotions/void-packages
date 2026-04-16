@@ -1,8 +1,7 @@
 # Template file for 'freecad'
 pkgname=freecad
-version=1.1.0
-revision=4
-_pycxx_ver=7.1.8
+version=1.1.1
+revision=2
 _ondsel_ver=09d6175a2ba69e7016fcecc4f384946a2f84f92d
 build_style=cmake
 pycompile_dirs="usr/lib/${pkgname}/Mod"
@@ -30,10 +29,8 @@ maintainer="Orphaned <orphan@voidlinux.org>"
 license="LGPL-2.0-or-later"
 homepage="https://freecadweb.org/"
 distfiles="https://github.com/FreeCAD/FreeCAD/releases/download/${version}/freecad_source_${version}.tar.gz
- ${SOURCEFORGE_SITE}/cxx/pycxx-${_pycxx_ver}.tar.gz
  https://github.com/FreeCAD/OndselSolver/archive/${_ondsel_ver}.tar.gz>OndselSolver-${_ondsel_ver}.tar.gz"
-checksum="3d041561aa129755eea51dfc0e1cdf43f2623ab06538e0860a91dbef1ae433d7
- 4b91e1e1141c23fbd5039df635c4bb6e75632168548f56b83ce177193c0c98c6
+checksum="c0e95d41415f1e73bfe2e0a0a28210f649b01ef531bbfed1ed15863950dc5381
  890fb6ddeb1b42face95854689ff7b96c926c368b7d616d9e31e4b35f79ddde8"
 python_version=3
 skip_extraction="pycxx-${_pycxx_ver}.tar.gz
@@ -44,12 +41,8 @@ if [ "$XBPS_TARGET_LIBC" = musl ]; then
 	LDFLAGS="-lexecinfo"
 fi
 
-CXXFLAGS="-DPYCXX_PYTHON_2TO3"
-
 post_extract() {
 	vsrcextract -C src/3rdParty/OndselSolver "OndselSolver-${_ondsel_ver}.tar.gz"
-	vsrcextract -C pycxx "pycxx-${_pycxx_ver}.tar.gz"
-	ln -Tsr ./pycxx/CXX src/CXX
 }
 
 post_patch() {
@@ -64,11 +57,6 @@ post_patch() {
 	     -e "s,\${PACKAGE_WCDATE},(from release)," \
 	     -e "s,\${PACKAGE_WCURL},Void Linux package ${pkgname}," \
 	     -i src/Build/Version.h.cmake
-}
-
-pre_configure() {
-	configure_args+=" -DPYCXX_INCLUDE_DIR=${wrksrc}/pycxx
-	 -DPYCXX_SOURCE_DIR=${wrksrc}/pycxx/Src"
 }
 
 post_install() {
